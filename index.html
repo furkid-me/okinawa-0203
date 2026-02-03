@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="2026 沖繩初春深度之旅 - 家族旅行完整規劃手冊">
+  <title>🌊 沖繩旅行規劃 2026</title>
+
+  <!-- React & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
+      background: #D4DFE6;
+      min-height: 100vh;
+      color: #1e293b;
+      overflow-x: hidden;
+    }
+
+    .app-bg {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #D4DFE6 0%, #CADBE9 100%);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .header {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      border: 2px solid #8EC0E4;
+    }
+
+    .header h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      color: #6AAFE6;
+      margin-bottom: 0.75rem;
+      font-weight: 800;
+    }
+
+    .header-info {
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 0.75rem;
+      background: white;
+      padding: 0.75rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      border: 2px solid #CADBE9;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: transparent;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+    }
+
+    .day-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      background: white;
+      padding: 0.75rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      margin-bottom: 1.5rem;
+    }
+
+    .day-btn {
+      padding: 0.875rem;
+      border: none;
+      border-radius: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .day-btn.active {
+      background: #6AAFE6;
+      color: white;
+      box-shadow: 0 2px 8px rgba(106, 175, 230, 0.3);
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border-left: 6px solid #8EC0E4;
+      transition: all 0.2s ease;
+      border: 2px solid #CADBE9;
+      border-left-width: 6px;
+    }
+
+    .event-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .event-card.trans {
+      border-left-color: #8EC0E4;
+    }
+
+    .event-card.food {
+      border-left-color: #6AAFE6;
+    }
+
+    .event-card.spot {
+      border-left-color: #8EC0E4;
+    }
+
+    .event-card.stay {
+      border-left-color: #6AAFE6;
+    }
+
+    .event-card.shop {
+      border-left-color: #8EC0E4;
+    }
+
+    .event-card.extra {
+      border-left-color: #6AAFE6;
+    }
+
+    .event-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .event-time {
+      display: inline-block;
+      background: #D4DFE6;
+      padding: 0.5rem 1rem;
+      border-radius: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #6AAFE6;
+      border: 1px solid #8EC0E4;
+    }
+
+    .event-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.625rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      line-height: 1.4;
+    }
+
+    .event-desc {
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 0.875rem;
+      font-size: 1rem;
+    }
+
+    .event-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .meta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.625rem 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-map {
+      background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+    }
+
+    .btn-map:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+    }
+
+    .btn-info {
+      background: #D4DFE6;
+      color: #475569;
+      border: 1px solid #CADBE9;
+    }
+
+    .btn-info:hover {
+      background: #CADBE9;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #f59e0b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nightlife-section {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 2px solid #CADBE9;
+    }
+
+    .nightlife-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nightlife-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #D4DFE6;
+      color: #475569;
+    }
+
+    .nightlife-tab.active {
+      background: #6AAFE6;
+      color: white;
+    }
+
+    .nightlife-item {
+      background: #f8fafc;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      margin-bottom: 0.875rem;
+      border-left: 4px solid #8EC0E4;
+      transition: all 0.2s ease;
+    }
+
+    .nightlife-item:hover {
+      background: #f1f5f9;
+    }
+
+    .nightlife-title {
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.375rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nightlife-desc {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    .tag-24h {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .tag-late {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .tag-kid {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .tools-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .tools-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .tool-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+    }
+
+    .tool-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .currency-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .currency-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.875rem;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .currency-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .currency-label {
+      font-weight: 700;
+      color: #64748b;
+      min-width: 50px;
+    }
+
+    .expense-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+      background: #f8fafc;
+      border-radius: 1rem;
+    }
+
+    .expense-input {
+      padding: 0.875rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.875rem;
+      font-size: 1rem;
+    }
+
+    .expense-input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .btn-primary {
+      padding: 1rem 1.75rem;
+      border: none;
+      border-radius: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.35);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      padding: 0.75rem 1.25rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+      color: #64748b;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      background: #f8fafc;
+      border-radius: 0.875rem;
+      margin-bottom: 0.625rem;
+      transition: all 0.3s;
+    }
+
+    .expense-item:hover {
+      background: #f1f5f9;
+    }
+
+    .expense-info {
+      flex: 1;
+    }
+
+    .expense-title {
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.25rem;
+    }
+
+    .expense-amount {
+      color: #0ea5e9;
+      font-weight: 700;
+    }
+
+    .btn-delete {
+      padding: 0.5rem;
+      border: none;
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-delete:hover {
+      background: #fecaca;
+      transform: scale(1.1);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #94a3b8;
+    }
+
+    .total-box {
+      background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin-top: 1.25rem;
+      text-align: center;
+    }
+
+    .total-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+
+    .total-amount {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .header {
+        padding: 1.5rem 1rem;
+      }
+
+      .tab-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .event-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-bg"></div>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Lucide Icons as inline SVG
+    const Calendar = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
+    const Moon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>;
+    const Calculator = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="14.01"></line><line x1="12" y1="14" x2="12" y2="14.01"></line><line x1="8" y1="14" x2="8" y2="14.01"></line><line x1="16" y1="18" x2="16" y2="18.01"></line><line x1="12" y1="18" x2="12" y2="18.01"></line><line x1="8" y1="18" x2="8" y2="18.01"></line></svg>;
+    const MapPin = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
+    const ExternalLink = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>;
+    const Star = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>;
+    const Info = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
+    const Plus = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
+    const Trash = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>;
+    const Wallet = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>;
+    const MessageCircle = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>;
+
+    const App = () => {
+      const [activeTab, setActiveTab] = useState('itinerary');
+      const [activeDay, setActiveDay] = useState(1);
+      const [nightlifeCat, setNightlifeCat] = useState('shopping');
+      const [jpy, setJpy] = useState('');
+      const [twd, setTwd] = useState('');
+      const [expenses, setExpenses] = useState([]);
+      const [expTitle, setExpTitle] = useState('');
+      const [expAmount, setExpAmount] = useState('');
+      const [showForm, setShowForm] = useState(false);
+
+      // Load expenses from localStorage
+      useEffect(() => {
+        const saved = localStorage.getItem('okinawa-expenses');
+        if (saved) {
+          try {
+            setExpenses(JSON.parse(saved));
+          } catch (e) { }
+        }
+      }, []);
+
+      // Save expenses to localStorage
+      useEffect(() => {
+        localStorage.setItem('okinawa-expenses', JSON.stringify(expenses));
+      }, [expenses]);
+
+      const itinerary = {
+        1: {
+          title: "那霸抵達・夜櫻與深夜秀",
+          events: [
+            { time: "13:30", name: "桃園機場起飛 (亞航) 🛫", type: "trans", desc: "AirAsia 航班出發。請確保護照與相關證件在身。" },
+            { time: "15:55", name: "抵達那霸機場 (OKA) 🛬", type: "trans", desc: "前往國內線航廈 3 樓 6 號口搭乘租車公司接駁車。" },
+            { time: "17:00", name: "租車取車完成 🚗", type: "trans", desc: "領取 Hustler & Roomy。請詳查車況與油錶。" },
+            { time: "18:00", name: "飯店 Check-in：Hotel Torifito", type: "stay", desc: "入住 Hotel Torifito 沖繩那霸。卸行李後空車出發。", map: "https://www.google.com/maps/search/?api=1&query=Hotel+Torifito+Okinawa+Naha" },
+            { time: "18:30", name: "漫湖公園：賞寒緋櫻 🌸", type: "spot", desc: "2 月中旬盛開期，長長的粉紅櫻花步道，路燈映照下的夜櫻非常適合家族合照。", info: "https://okinawa.letsgojp.com/archives/833458/", map: "https://www.google.com/maps/search/?api=1&query=Manko+Park+Okinawa" },
+            { time: "19:45", name: "晚餐：特色居酒屋", type: "food", desc: "推薦：目利銀次新都心店（視覺系木桶外觀）或 波照間（三線演奏與傳統料理）。", map: "https://www.google.com/maps/search/?api=1&query=目利きの銀次+新都心店" },
+            { time: "21:30", name: "深夜自由選擇：Churasun 6 (成人秀) 🔞", type: "extra", desc: "沖繩著名的成人表演劇場，體驗精彩舞蹈與深夜氛圍。", ticket: "https://www.kkday.com/zh-tw/product/181495?srsltid=AfmBOooiqSBf2FYjESja540p1mBJWN0KIkijna05FdFnDyLiWdljs8jq", map: "https://www.google.com/maps/search/?api=1&query=Churasun6+Okinawa" }
+          ]
+        },
+        2: {
+          title: "溫泉、地底奇觀與購物",
+          events: [
+            { time: "09:00", name: "飯店出發 🚗", type: "trans", desc: "空車前往南城市，開始溫泉與地底之旅。" },
+            { time: "09:45", name: "猿人之湯 (天然溫泉) ♨️", type: "spot", desc: "佐敷高地的天然海景溫泉，早上泡湯人少，欣賞中城灣美景，緩解第一天疲勞。", info: "https://lailai-web.com/apeman-spa/", map: "https://www.google.com/maps/search/?api=1&query=猿人の湯" },
+            { time: "11:30", name: "玉泉洞 (沖繩世界) 🗿", type: "spot", rating: 4.3, desc: "日本規模最大的鐘乳石洞，探索 30 萬年的大自然奇蹟，隨後可看傳統太鼓秀。", info: "https://okinawa.letsgojp.com/archives/757370/", map: "https://www.google.com/maps/search/?api=1&query=玉泉洞" },
+            { time: "13:00", name: "午餐：燒肉本部牧場 (那霸店)", type: "food", rating: 4.5, desc: "自家牧場「本部和牛」，肉質穩定且軟嫩，位於縣廳前。", map: "https://www.google.com/maps/search/?api=1&query=Motobu+Farm+Yakiniku+Naha" },
+            { time: "15:00", name: "下午購物支線 (自由選擇)", type: "shop", desc: "成員可依興趣分頭行動：漫畫倉庫（24H 二手挖寶）| 2nd STREET（高品質二手服飾）| 那霸 Main Place（Uniqlo、MUJI、大型超市）。", infos: [{ name: "漫畫倉庫介紹", url: "https://supertaste.tvbs.com.tw/asia/354797" }, { name: "2nd STREET 介紹", url: "https://ajunfun.tw/2nd-street/" }], maps: [{ name: "漫畫倉庫", url: "https://www.google.com/maps/search/?api=1&query=Manga+Souko+Naha" }, { name: "2nd STREET 天久店", url: "https://www.google.com/maps/search/?api=1&query=2nd+STREET+Ameku" }, { name: "那霸 Main Place", url: "https://www.google.com/maps/search/?api=1&query=Naha+Main+Place" }] },
+            { time: "18:30", name: "晚間行程二選一", type: "extra", desc: "選項 A：東南植物樂園燈光秀（日本排名第一燈海）| 選項 B：美國村（美式異國風情，悠閒散策購物）。", infos: [{ name: "東南植物樂園介紹", url: "https://www.southeast-botanical.jp/tw/illumination/" }, { name: "美國村介紹", url: "https://www.gltjp.com/zh-hant/article/item/21095/" }], maps: [{ name: "東南植物樂園", url: "https://www.google.com/maps/search/?api=1&query=Southeast+Botanical+Gardens+Okinawa" }, { name: "美國村", url: "https://www.google.com/maps/search/?api=1&query=American+Village+Okinawa" }] }
+          ]
+        },
+        3: {
+          title: "北部經典・湛藍大海與古宅晚餐",
+          events: [
+            { time: "09:00", name: "飯店出發 🚗", type: "trans", desc: "準時啟程前往北部名護地區。" },
+            { time: "11:00", name: "午餐：Captain Kangaroo Hamburger", type: "food", rating: 4.6, desc: "沖繩漢堡巔峰。麵包皮壓烤工法焦香酥脆。建議 11 點準時報到卡位。", map: "https://www.google.com/maps/search/?api=1&query=Captain+Kangaroo+Okinawa" },
+            { time: "12:45", name: "古宇利大橋 & 古宇利島", type: "spot", rating: 4.7, desc: "開車跨越絕美「古宇利藍」大海。島上有心形岩與神話遺址。", info: "https://okinawa.letsgojp.com/archives/392405/", map: "https://www.google.com/maps/search/?api=1&query=古宇利大橋" },
+            { time: "14:30", name: "美麗海水族館", type: "spot", rating: 4.6, desc: "核心『黑潮之海』巨型主缸，15:00 鯨鯊餵食秀強烈推薦。", infos: [{ name: "官網", url: "https://churaumi.okinawa/tc/" }, { name: "介紹", url: "https://www.gltjp.com/zh-hant/article/item/21171/" }], map: "https://www.google.com/maps/search/?api=1&query=Okinawa+Churaumi+Aquarium" },
+            { time: "19:30", name: "晚餐：百年古家 大家 (Ufuya)", type: "food", rating: 4.4, desc: "百年琉球古民家餐廳。主打高品質阿古豬 (Agu Pork) 涮涮鍋與庭園瀑布造景。", map: "https://www.google.com/maps/search/?api=1&query=Ufuya+Okinawa" },
+            { time: "20:30", name: "返回那霸飯店", type: "trans", desc: "開車返回 Hotel Torifito 休息。" }
+          ]
+        },
+        4: {
+          title: "城市散策與最終採買",
+          events: [
+            { time: "09:00", name: "Check-out 出發 🚗", type: "trans", desc: "全員行李裝載上車。" },
+            { time: "09:30", name: "壺屋陶器街 晨間散步", type: "spot", rating: 4.3, desc: "300 年歷史的陶藝發源地，鵝卵石街道與屋頂上的風獅爺，感受寧靜古那霸。", info: "https://ajunfun.tw/yachimun/", map: "https://www.google.com/maps/search/?api=1&query=壺屋陶器街" },
+            { time: "10:30", name: "波上宮", type: "spot", rating: 4.4, desc: "珊瑚礁懸崖上的守護神。必買小書包御守給小孩。", info: "https://okinawa.letsgojp.com/archives/757433/", map: "https://www.google.com/maps/search/?api=1&query=波上宮" },
+            { time: "12:00", name: "市區悠閒午餐", type: "food", desc: "在國際通或附近選擇喜歡的餐廳享用最後一餐。" },
+            { time: "15:00", name: "Ashibinaa Outlet 最終採買", type: "shop", desc: "離機場僅 15 分鐘，最後衝刺運動品牌與精品。", infos: [{ name: "介紹1", url: "https://bobbyfun.tw/2024-01-07-2700/" }, { name: "介紹2", url: "https://okinawa.letsgojp.com/archives/10240/" }], map: "https://www.google.com/maps/search/?api=1&query=Ashibinaa+Outlet" },
+            { time: "17:00", name: "⛽ 滿油還車 (還車期限)", type: "trans", desc: "歸還車輛，搭乘租車接駁車前往機場。" },
+            { time: "21:30", name: "虎航起飛歸家 🛫", type: "trans", desc: "帶著滿載回憶歸家。" }
+          ]
+        }
+      };
+
+      const nightlife = {
+        shopping: [
+          { name: "💊 藥妝必買參考", desc: "2024 最新藥妝採購清單與推薦商品。", type: "參考", info: "https://bobbyfun.tw/2024-03-06-3076/" },
+          { name: "Union 超市 (牧志店)", desc: "24H 在地超市。補給水、鮮乳與半價熟食。", type: "24H", map: "https://www.google.com/maps/search/?api=1&query=Union+Makishi" },
+          { name: "唐吉訶德 國際通店", desc: "24H 購物天堂。凌晨免排隊退稅最快。", type: "24H", map: "https://www.google.com/maps/search/?api=1&query=Don+Quijote+Kokusai+Dori" },
+          { name: "MaxValu (松山店)", desc: "24H 旗艦超市。熟食豐富，宵夜首選。", type: "24H", map: "https://www.google.com/maps/search/?api=1&query=MaxValu+Matsuyama" },
+          { name: "漫畫倉庫 (那霸店)", desc: "24H 二手探險首選。公仔、模型、電玩、精品包挖寶。", type: "24H", map: "https://www.google.com/maps/search/?api=1&query=Manga+Souko+Naha" },
+          { name: "2nd STREET (天久店)", desc: "至 24:00。高品質二手服飾、潮牌選物。", type: "深夜", map: "https://www.google.com/maps/search/?api=1&query=2nd+STREET+Ameku" },
+          { name: "Drug Eleven (藥妝)", desc: "至 24:00。囤貨藥品首選。", type: "深夜", map: "https://www.google.com/maps/search/?api=1&query=Drug+Eleven+Naha" },
+          { name: "札幌藥妝 (Satudora)", desc: "至 23:00。環境寬敞不擁擠，品項齊全。", type: "深夜", map: "https://www.google.com/maps/search/?api=1&query=Satudora+Naha" },
+          { name: "Aeon 那霸 (超市部)", desc: "至 24:00。百貨型超市補給站。", type: "深夜", map: "https://www.google.com/maps/search/?api=1&query=Aeon+Naha" },
+          { name: "大國藥妝 (中央店)", desc: "至 23:00。價格具競爭力，店員中文通。", type: "深夜", map: "https://www.google.com/maps/search/?api=1&query=Daikoku+Drug+Kokusai+Dori" },
+          { name: "Lawson 飯店旁", desc: "24H。就在 Hotel Torifito 附近。", type: "24H", map: "https://www.google.com/maps/search/?api=1&query=Lawson+Naha" }
+        ],
+        food: [
+          { name: "暖暮拉麵 (牧志店)", desc: "至 02:00 AM。九州冠軍拉麵。", kid: "OK", map: "https://www.google.com/maps/search/?api=1&query=暖暮+那霸" },
+          { name: "一蘭拉麵 (國際通店)", desc: "至 06:00 AM。包廂宵夜首選。", kid: "OK", map: "https://www.google.com/maps/search/?api=1&query=一蘭+那霸" },
+          { name: "Mikado (みかど) 食堂", desc: "至 02:00 AM。什錦飯靈魂食堂。", kid: "推薦", map: "https://www.google.com/maps/search/?api=1&query=Mikado+Naha" },
+          { name: "果然牛排 (Yappari)", desc: "至 02:00 AM。石板牛排吃到飽。", kid: "OK", map: "https://www.google.com/maps/search/?api=1&query=Yappari+Steak+Naha" },
+          { name: "Steak House 88", desc: "至 23:00。老牌沖繩牛排。兒童餐多。", kid: "推薦", map: "https://www.google.com/maps/search/?api=1&query=Steak+House+88" },
+          { name: "波照間 (三線居酒屋)", desc: "晚間營業。現場演奏。帶長輩必去特色店。", kid: "推薦", map: "https://www.google.com/maps/search/?api=1&query=波照間+那霸" },
+          { name: "康龍拉麵 (Kouryu)", desc: "至 05:00 AM。在地首選。", kid: "OK", map: "https://www.google.com/maps/search/?api=1&query=Kouryu+Naha" },
+          { name: "國際通屋台村", desc: "至 24:00。聚餐氛圍首選。20 間小店。", kid: "熱鬧", map: "https://www.google.com/maps/search/?api=1&query=國際通屋台村" },
+          { name: "傑克牛排 (Jack's)", desc: "至 22:30。傳奇牛排老店。", kid: "OK", map: "https://www.google.com/maps/search/?api=1&query=Jack's+Steak+House+Naha" },
+          { name: "串角 (Kushikado)", desc: "至 02:00 AM。串燒放題。", kid: "較吵", map: "https://www.google.com/maps/search/?api=1&query=串角+久茂地" }
+        ],
+        dessert: [
+          { name: "Blue Seal (國際通店)", desc: "至 22:30。必吃鹽牛奶口味冰淇淋。", map: "https://www.google.com/maps/search/?api=1&query=Blue+Seal+Kokusai+Dori" },
+          { name: "鹽屋 (Yukisio)", desc: "至 22:00。雪鹽霜淇淋專賣。", map: "https://www.google.com/maps/search/?api=1&query=鹽屋+那霸" },
+          { name: "McDonald's 24H", desc: "24H。深夜限定派與塔可堡。", map: "https://www.google.com/maps/search/?api=1&query=McDonald's+Naha" },
+          { name: "LAWSON 冰櫃甜品", desc: "24H。精品甜點、哈根達斯。", map: "https://www.google.com/maps/search/?api=1&query=Lawson+Naha" },
+          { name: "超市深夜熟食點心", desc: "MaxValu、Union。和菓子與蛋糕折扣。", map: "https://www.google.com/maps/search/?api=1&query=MaxValu+Matsuyama" }
+        ]
+      };
+
+      const convert = (from, val) => {
+        const rate = 0.21;
+        if (from === 'jpy') {
+          setJpy(val);
+          setTwd(val ? Math.round(val * rate) : '');
+        } else {
+          setTwd(val);
+          setJpy(val ? Math.round(val / rate) : '');
+        }
+      };
+
+      const addExpense = () => {
+        if (!expTitle.trim() || !expAmount) return;
+        setExpenses([{ title: expTitle.trim(), amountJpy: parseInt(expAmount) }, ...expenses]);
+        setExpTitle('');
+        setExpAmount('');
+        setShowForm(false);
+      };
+
+      const deleteExpense = (idx) => {
+        setExpenses(expenses.filter((_, i) => i !== idx));
+      };
+
+      const totalJpy = expenses.reduce((sum, exp) => sum + exp.amountJpy, 0);
+      const totalTwd = Math.round(totalJpy * 0.21);
+
+      const renderItinerary = () => (
+        <div className="fade-in">
+          <div className="day-selector">
+            {[1, 2, 3, 4].map(d => (
+              <button
+                key={d}
+                onClick={() => setActiveDay(d)}
+                className={`day-btn ${activeDay === d ? 'active' : ''}`}
+              >
+                Day {d}
+              </button>
+            ))}
+          </div>
+
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem', color: '#1e293b' }}>
+            {itinerary[activeDay].title}
+          </h2>
+
+          {itinerary[activeDay].events.map((ev, idx) => (
+            <div key={idx} className={`event-card ${ev.type}`}>
+              <div className="event-header">
+                <span className="event-time">{ev.time}</span>
+                {ev.rating && (
+                  <div className="rating">
+                    <Star /> {ev.rating}
+                  </div>
+                )}
+              </div>
+              <h3 className="event-title">{ev.name}</h3>
+              <p className="event-desc">{ev.desc}</p>
+              {(ev.map || ev.ticket || ev.info || ev.infos || ev.maps) && (
+                <div className="event-meta">
+                  {ev.ticket && (
+                    <a href={ev.ticket} target="_blank" className="meta-btn" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white' }}>
+                      <ExternalLink /> 訂票
+                    </a>
+                  )}
+                  {ev.info && (
+                    <a href={ev.info} target="_blank" className="meta-btn" style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)', color: 'white' }}>
+                      <Info /> 介紹
+                    </a>
+                  )}
+                  {ev.infos && ev.infos.map((infoItem, infoIdx) => (
+                    <a key={infoIdx} href={infoItem.url} target="_blank" className="meta-btn" style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)', color: 'white' }}>
+                      <Info /> {infoItem.name}
+                    </a>
+                  ))}
+                  {ev.map && (
+                    <a href={ev.map} target="_blank" className="meta-btn btn-map">
+                      <MapPin /> 地圖
+                    </a>
+                  )}
+                  {ev.maps && ev.maps.map((mapItem, mapIdx) => (
+                    <a key={mapIdx} href={mapItem.url} target="_blank" className="meta-btn btn-map">
+                      <MapPin /> {mapItem.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+
+      const renderNightlife = () => (
+        <div className="nightlife-section fade-in">
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.25rem', color: '#1e293b' }}>
+            那霸深夜探索名單
+          </h2>
+
+          <div className="nightlife-tabs">
+            <button
+              onClick={() => setNightlifeCat('shopping')}
+              className={`nightlife-tab ${nightlifeCat === 'shopping' ? 'active' : ''}`}
+            >
+              🛒 購物 (10選)
+            </button>
+            <button
+              onClick={() => setNightlifeCat('food')}
+              className={`nightlife-tab ${nightlifeCat === 'food' ? 'active' : ''}`}
+            >
+              🍜 美食 (10選)
+            </button>
+            <button
+              onClick={() => setNightlifeCat('dessert')}
+              className={`nightlife-tab ${nightlifeCat === 'dessert' ? 'active' : ''}`}
+            >
+              🍰 甜點 (5選)
+            </button>
+          </div>
+
+          {nightlife[nightlifeCat].map((item, idx) => (
+            <div key={idx} className="nightlife-item">
+              <div className="nightlife-title">
+                {item.name}
+                {item.type && <span className={`tag tag-${item.type === '24H' ? '24h' : 'late'}`}>{item.type}</span>}
+                {item.kid && <span className="tag tag-kid">{item.kid}</span>}
+              </div>
+              <p className="nightlife-desc">{item.desc}</p>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {item.info && (
+                  <a href={item.info} target="_blank" className="meta-btn btn-info" style={{ display: 'inline-flex' }}>
+                    <Info /> 介紹
+                  </a>
+                )}
+                {item.map && (
+                  <a href={item.map} target="_blank" className="meta-btn btn-map" style={{ display: 'inline-flex' }}>
+                    <MapPin /> 地圖
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+
+      const renderTools = () => (
+        <div className="tools-grid fade-in">
+          <div className="tool-card">
+            <h3 className="tool-title">
+              <Calculator /> 匯率計算器
+            </h3>
+            <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1rem' }}>
+              即時匯率：1 JPY ≈ 0.21 TWD
+            </p>
+            <div className="currency-row">
+              <span className="currency-label">JPY</span>
+              <input
+                type="number"
+                className="currency-input"
+                placeholder="10000"
+                value={jpy}
+                onChange={(e) => convert('jpy', e.target.value)}
+              />
+            </div>
+            <div className="currency-row">
+              <span className="currency-label">TWD</span>
+              <input
+                type="number"
+                className="currency-input"
+                placeholder="2100"
+                value={twd}
+                onChange={(e) => convert('twd', e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="tool-card">
+            <h3 className="tool-title">
+              <Wallet /> 支出追蹤
+            </h3>
+
+            {!showForm && (
+              <button onClick={() => setShowForm(true)} className="btn-secondary" style={{ width: '100%', marginBottom: '1.25rem' }}>
+                <Plus /> 新增支出
+              </button>
+            )}
+
+            {showForm && (
+              <div className="expense-form">
+                <input
+                  type="text"
+                  className="expense-input"
+                  placeholder="項目名稱（例：晚餐）"
+                  value={expTitle}
+                  onChange={(e) => setExpTitle(e.target.value)}
+                />
+                <input
+                  type="number"
+                  className="expense-input"
+                  placeholder="金額 (JPY)"
+                  value={expAmount}
+                  onChange={(e) => setExpAmount(e.target.value)}
+                />
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button onClick={addExpense} className="btn-primary" style={{ flex: 1 }}>
+                    確定新增
+                  </button>
+                  <button onClick={() => { setShowForm(false); setExpTitle(''); setExpAmount(''); }} className="btn-secondary">
+                    取消
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {expenses.length === 0 && !showForm && (
+              <div className="empty-state">
+                <p>尚無支出記錄</p>
+              </div>
+            )}
+
+            {expenses.map((exp, idx) => (
+              <div key={idx} className="expense-item">
+                <div className="expense-info">
+                  <div className="expense-title">{exp.title}</div>
+                  <div className="expense-amount">
+                    ¥{exp.amountJpy.toLocaleString()} <span style={{ color: '#94a3b8', fontSize: '0.85rem', marginLeft: '0.5rem' }}>≈ TWD ${Math.round(exp.amountJpy * 0.21).toLocaleString()}</span>
+                  </div>
+                </div>
+                <button onClick={() => deleteExpense(idx)} className="btn-delete">
+                  <Trash />
+                </button>
+              </div>
+            ))}
+
+            {expenses.length > 0 && (
+              <div className="total-box">
+                <div className="total-label">總計支出</div>
+                <div className="total-amount">¥{totalJpy.toLocaleString()}</div>
+                <div style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.9 }}>
+                  ≈ TWD ${totalTwd.toLocaleString()}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="tool-card">
+            <h3 className="tool-title">
+              <MessageCircle /> 日文會話參考
+            </h3>
+            <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1rem' }}>
+              旅遊常用日文會話，點擊查看詳細內容
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <a
+                href="https://matcha-jp.com/tw/2219"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="meta-btn btn-info"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                🗺️ 問路相關日文
+              </a>
+              <a
+                href="https://matcha-jp.com/tw/2219"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="meta-btn btn-info"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                🛍️ 購物相關日文
+              </a>
+              <a
+                href="https://matcha-jp.com/tw/2635"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="meta-btn btn-info"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                🍜 餐廳相關日文
+              </a>
+              <a
+                href="https://matcha-jp.com/tw/2598"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="meta-btn btn-info"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                🏨 住宿相關日文
+              </a>
+            </div>
+          </div>
+        </div>
+      );
+
+      return (
+        <div className="container">
+          <div className="header">
+            <h1>🌊 沖繩旅行規劃 2026</h1>
+            <div className="header-info">
+              <div>📅 2026/02/15 - 02/18 (四天三夜)</div>
+              <div>👨‍👩‍👧‍👦 6 位大人、1 位兒童 (6 歲)</div>
+              <div>🏨 Hotel Torifito 沖繩那霸 | 🚗 Hustler + Roomy</div>
+            </div>
+            <div style={{ marginTop: '1.25rem' }}>
+              <a
+                href="https://www.canva.com/design/DAHAS8slYe4/JsVYeiCMXj5cTQqeCTmbfg/view?utm_content=DAHAS8slYe4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6921c84b5d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="meta-btn btn-map"
+                style={{ display: 'inline-flex', fontSize: '0.95rem', padding: '0.75rem 1.5rem' }}
+              >
+                📖 查看完整旅遊手冊
+              </a>
+            </div>
+          </div>
+
+          <div className="tab-nav">
+            <button
+              onClick={() => setActiveTab('itinerary')}
+              className={`tab-btn ${activeTab === 'itinerary' ? 'active' : ''}`}
+            >
+              <Calendar /> 行程規劃
+            </button>
+            <button
+              onClick={() => setActiveTab('nightlife')}
+              className={`tab-btn ${activeTab === 'nightlife' ? 'active' : ''}`}
+            >
+              <Moon /> 夜生活
+            </button>
+            <button
+              onClick={() => setActiveTab('tools')}
+              className={`tab-btn ${activeTab === 'tools' ? 'active' : ''}`}
+            >
+              <Calculator /> 工具
+            </button>
+          </div>
+
+          {activeTab === 'itinerary' && renderItinerary()}
+          {activeTab === 'nightlife' && renderNightlife()}
+          {activeTab === 'tools' && renderTools()}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
